@@ -29,19 +29,16 @@ BIO代码示例：
 //服务端示例
 public class SocketServer {
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(9000);
+        ServerSocket serverSocket = new ServerSocket(19000);
         while (true) {
             System.out.println("等待连接。。");
             Socket socket = serverSocket.accept(); //阻塞方法
             System.out.println("有客户端连接了。。");
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        handler(socket);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            new Thread(()->{
+                try {
+                    handler(socket);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }).start();
         }
